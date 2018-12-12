@@ -32,8 +32,6 @@ struct Recipe {
     let prepTime: Int
     let cookTime: Int
     let yield: Int
-    let ingredients: [String]?
-    let directions: [String]?
 }
 
 extension Recipe {
@@ -44,8 +42,6 @@ extension Recipe {
             let prepTime = dict["prepTime"] as? Int,
             let cookTime = dict["cookTime"] as? Int,
             let yield = dict["yield"] as? Int,
-            let ingredients = dict["ingredients"] as? [String],
-            let directions = dict["directions"] as? [String],
             let photoDescription = dict["photoDescription"] as? String else {
                 return nil
         }
@@ -55,8 +51,6 @@ extension Recipe {
         self.prepTime = prepTime
         self.cookTime = cookTime
         self.yield = yield
-        self.ingredients = ingredients
-        self.directions = directions
         self.photoDescription = photoDescription
 
         if let imageName = dict["imageName"] as? String, !imageName.isEmpty {
@@ -79,8 +73,8 @@ extension Recipe {
                 return nil
         }
 
-        return array.map { Recipe(dict: $0) }
-            .filter { $0 != nil }
-            .map { $0! }
+        return array.map { Recipe(dict: $0)! }
+
+
     }
 }
